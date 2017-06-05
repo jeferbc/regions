@@ -13,17 +13,20 @@
             <td>Actions</td>
           </tr>
         </thead>
-        <% @region.municipalities.each do |municipality| %>
-          <tr>
-            <td><%= municipality.id %></td>
-            <td><%= municipality.name.humanize %></td>
-            <td><%= municipality.code %></td>
-            <td><%= municipality.status %></td>
-            <td><%= link_to 'Edit', edit_region_municipality_path(@region, municipality) %> -
-              <%= link_to "Delete", region_municipality_path(@region, municipality) , method: :delete, data: { confirm: 'Are you sure?' }%></td>
-          </tr>
-        <% end %>
+        <tbody>
+          <% @region.municipalities.each do |municipality| %>
+            <tr>
+              <td><%= municipality.id %></td>
+              <td><%= municipality.name.humanize %></td>
+              <td><%= municipality.code %></td>
+              <td><%= municipality.status.humanize %></td>
+              <td><%= link_to 'Edit', edit_region_municipality_path(@region, municipality) %> -
+                <%= link_to "Delete", region_municipality_path(@region, municipality) , method: :delete, data: { confirm: 'Are you sure?' }%></td>
+            </tr>
+          <% end %>
+        </tbody>
       </table>
+      <%= link_to "Back", regions_path, class: "btn btn-default" %>
     </div>
   </div>
 </div>

@@ -1,21 +1,24 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-8 col-sm-offset-2">
-      <%= form_for region do |f| %>
-        <% if region.errors.any? %>
+      <%= form_for @region do |f| %>
+        <% if @region.errors.any? %>
           <div id="errors_explanation">
-            <h2><%=pluralize(region.errors.count,"error")%> Prohibited this product from being saved:</h2>
+            <h2><%=pluralize(@region.errors.count,"error")%> Prohibited this product from being saved:</h2>
             <ul>
-            <% region.errors.full_messages.each do |message| %>
+            <% @region.errors.full_messages.each do |message| %>
               <li><%= message %></li>
             <% end %>
             </ul>
           </div>
         <% end %>
-
         <div class="form-group">
           <%= f.label :name %>
           <%= f.text_field :name, class: "form-control"%>
+        </div>
+        <div class="form-group">
+          <h3>Delete municipalities</h3>
+          <%= f.collection_check_boxes(:municipality_ids, @region.municipalities, :id, :name, {include_hidden: false}, {class: 'checkbox'}) %>
         </div>
         <div class="actions">
           <%= f.submit 'Guardar', class:"btn btn-success" %>

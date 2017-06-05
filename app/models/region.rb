@@ -11,6 +11,8 @@
 
 class Region < ApplicationRecord
   include Tokenable
-  
+
   has_many :municipalities
+  validates :name, presence: true
+
 end

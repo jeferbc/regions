@@ -25,6 +25,9 @@ class RegionsController < ApplicationController
 
   def update
     @region.update(region_params)
+    if params[:region][:municipality_ids].present?
+      Municipality.delete_municipalities(params[:region][:municipality_ids])
+    end
     if @region.save
       flash[:notice] = "The Region has been updated succesfully"
       redirect_to region_path(id: @region.id)
@@ -41,7 +44,7 @@ class RegionsController < ApplicationController
 
   private
   def region_params
-    params.require(:region).permit(:name)
+    params.require(:region).permit(:name, :municipality_ids)
   end
 
   def set_region

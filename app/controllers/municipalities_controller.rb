@@ -22,6 +22,9 @@ class MunicipalitiesController < ApplicationController
 
   def update
     @municipality.update(municipality_params)
+    if params[:municipality][:status] == "inactive"
+      @municipality.inactive_status
+    end
     if @municipality.save
       flash[:notice] = "The Municipality has been updated succesfully"
       redirect_to region_path(@region)
@@ -37,15 +40,15 @@ class MunicipalitiesController < ApplicationController
   end
 
   private
-  def municipality_params
-    params.require(:municipality).permit(:name)
-  end
+    def municipality_params
+      params.require(:municipality).permit(:name, :status)
+    end
 
-  def set_municipalty
-    @municipality = @region.municipalities.find(params[:id])
-  end
+    def set_municipalty
+      @municipality = @region.municipalities.find(params[:id])
+    end
 
-  def set_region
-    @region = Region.find(params[:region_id])
-  end
+    def set_region
+      @region = Region.find(params[:region_id])
+    end
 end
