@@ -1,6 +1,6 @@
-class CreateMunicipios < ActiveRecord::Migration[5.0]
+class CreateMunicipalities < ActiveRecord::Migration[5.0]
   def change
-    create_table :municipios do |t|
+    create_table :municipalities do |t|
       t.integer :code
       t.string :name
       t.integer :status

@@ -1,0 +1,31 @@
+<div class="container">
+  <div class="col-sm-10 col-sm-offset-1">
+    <h1 class="text-center">Regions</h1>
+    <div class="row">
+      <%= link_to "New Region", new_region_path, class:"btn btn-primary" %>
+      <table class="table">
+        <thead>
+          <tr>
+            <td>Id</td>
+            <td>Code</td>
+            <td>Name</td>
+            <td>Actions</td>
+          </tr>
+        </thead>
+        <tbody>
+          <% @regions.each do |region| %>
+            <tr>
+              <td><%= region.id %></td>
+              <td><%= region.code %></td>
+              <td><%= region.name %></td>
+              <td><%= link_to 'Edit', edit_region_path(region) %> -
+                <%= link_to 'Delete', region_path(region), method: :delete, data: { confirm: 'Are you sure?' } %> -
+                <%= link_to "New Municipality", new_region_municipality_path(region) %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

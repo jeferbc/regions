@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="row">
+    <div class="col-sm-8 col-sm-offset-2">
+      <%= form_for [municipality.region, municipality]  do |f| %>
+        <% if municipality.errors.any? %>
+          <div id="errors_explanation">
+            <h2><%=pluralize(municipality.errors.count,"error")%> Prohibited this product from being saved:</h2>
+            <ul>
+            <% municipality.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+        <div class="form-group">
+          <%= f.label :name %>
+          <%= f.text_field :name, class: "form-control"%>
+        </div>
+        <div class="actions">
+          <%= f.submit 'Save', class:"btn btn-primary" %>
+          <%= link_to 'Cancel', region_path(municipality.region), class: 'btn btn-default' %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
